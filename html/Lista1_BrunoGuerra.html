@@ -1,0 +1,592 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Processamento Digital de Imagens 2021/1</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-08-03"><meta name="DC.source" content="Lista1_BrunoGuerra.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Processamento Digital de Imagens 2021/1</h1><!--introduction--><p>Aluno: Bruno Baptista Guerra</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Quest&atilde;o 1</a></li><li><a href="#2">Quest&atilde;o 2</a></li><li><a href="#4">Quest&atilde;o 3</a></li><li><a href="#5">Quest&atilde;o 4</a></li><li><a href="#6">Quest&atilde;o 5</a></li><li><a href="#10">Quest&atilde;o 6</a></li></ul></div><h2 id="1">Quest&atilde;o 1</h2><pre class="codeinput">clc; close <span class="string">all</span>; clear <span class="string">all</span>;
+
+img_questao1 = imread(<span class="string">'Fig10.15(a).jpg'</span>);
+img_size1 = size(img_questao1);
+image = img_questao1(:,:,1);
+A = 110;
+B = 150;
+img_size1 = size(img_questao1);
+img_final1 = zeros(img_size1(1),img_size1(2));
+
+<span class="keyword">for</span> I = 1:img_size1(1)
+    <span class="keyword">for</span> J = 1:img_size1(2)
+        <span class="keyword">if</span> (A &lt; image(I,J)&amp;&amp; image(I,J) &lt; B)
+            img_final1(I,J) = 0;
+        <span class="keyword">else</span>
+            img_final1(I,J) = image(I,J);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+figure(1)
+subplot(1,2,1); imshow(uint8(img_questao1)); title(<span class="string">'Imagem Original'</span>);
+subplot(1,2,2); imshow(uint8(img_final1)); title(<span class="string">'Imagem com o fatiamento de n&iacute;veis de intensidade'</span>)
+</pre><img vspace="5" hspace="5" src="Lista1_BrunoGuerra_01.png" alt=""> <h2 id="2">Quest&atilde;o 2</h2><pre class="codeinput">input_image = imread(<span class="string">'lena.tif'</span>);
+[M, N] = size(input_image);
+FT_img = fft2(double(input_image));
+
+<span class="comment">% a)</span>
+D0 = 30;
+u = 0:(M-1);
+idx = find(u&gt;M/2);
+u(idx) = u(idx)-M;
+v = 0:(N-1);
+idy = find(v&gt;N/2);
+v(idy) = v(idy)-N;
+[V, U] = meshgrid(v, u);
+D = sqrt(U.^2+V.^2);
+H = double(D &lt;= D0);
+G = H.*FT_img;
+
+output_image_lowpass = real(ifft2(double(G)));
+
+<span class="comment">% b)</span>
+filter_mask = [0 -1 0;-1 4 -1; 0 -1 0];
+</pre><pre class="codeinput"><span class="keyword">for</span> I = 2:M-1
+    <span class="keyword">for</span> J = 2:N-1
+        sum = 0;
+        row = 0;
+        col = 1;
+        <span class="keyword">for</span> k = I-1:I+1
+            row = row + 1;
+            col = 1;
+            <span class="keyword">for</span> l = J-1:J+1
+                sum = sum + input_image(k,l)*filter_mask(row,col);
+                col = col + 1;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+      output_image_laplacian(I,J) = sum;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% c)</span>
+
+resp = imfilter(input_image, filter_mask, <span class="string">'conv'</span>);
+
+minR = min(resp(:));
+maxR = max(resp(:));
+resp = (resp - minR) / (maxR - minR);
+sharpened = input_image + resp;
+minA = min(sharpened(:));
+maxA = max(sharpened(:));
+sharpened = (sharpened - minA) / (maxA - minA);
+output_image_sharpened = imadjust(input_image, [0.3 0.7], []);
+
+figure(2)
+subplot(2, 2, 1), imshow(input_image); title(<span class="string">'Imagem Original'</span>);
+subplot(2, 2, 2), imshow(output_image_lowpass, [ ]); title(<span class="string">'Imagem com filtro passa-baixa'</span>)
+subplot(2, 2, 3), imshow(output_image_laplacian, [ ]); title(<span class="string">'Imagem com filtro laplaciano'</span>)
+subplot(2, 2, 4), imshow(output_image_sharpened, [ ]); title(<span class="string">'Imagem com m&aacute;scara de nitidez'</span>)
+</pre><img vspace="5" hspace="5" src="Lista1_BrunoGuerra_02.png" alt=""> <h2 id="4">Quest&atilde;o 3</h2><pre class="codeinput">input_image = imread(<span class="string">'frexp_1.png'</span>);
+[M, N] = size(input_image);
+
+output_image_downsample = input_image(1:2:M, 1:2:N);
+
+<span class="keyword">for</span> I = 1:M
+    <span class="keyword">for</span> J = 1:N
+        rmin = max(1,I-1);
+        rmax = min(M,I+1);
+        cmin = max(1,J-1);
+        cmax = min(N,J+1);
+        temp = input_image(rmin:rmax, cmin:cmax);
+        output_image_smoothed(I,J) = mean(temp(:));
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+figure(3)
+subplot(1,3,1); imshow(input_image); title(<span class="string">'Imagem Original'</span>);
+subplot(1,3,2); imshow(uint8(output_image_downsample)); title(<span class="string">'Imagem Reduzida'</span>)
+subplot(1,3,3); imshow(uint8(output_image_smoothed)); title(<span class="string">'Imagem Suavizada'</span>)
+</pre><img vspace="5" hspace="5" src="Lista1_BrunoGuerra_03.png" alt=""> <h2 id="5">Quest&atilde;o 4</h2><pre class="codeinput">input_image1 = imread(<span class="string">'lena.tif'</span>);
+input_image2 = imread(<span class="string">'elaine.tif'</span>);
+
+
+F1 = fft2(input_image1);
+F1 = log(1 + fftshift(F1));
+magnitude1 = abs(F1);
+phase1 = angle(F1);
+
+F2 = fft2(input_image2);
+F2 = log(1 + fftshift(F2));
+magnitude2 = abs(F2);
+phase2 = angle(F2);
+
+figure(4)
+subplot(2,3,1); imshow(input_image1); title(<span class="string">'Imagem Original'</span>);
+subplot(2,3,2); imshow(magnitude1,[]); title(<span class="string">'Espectro'</span>);
+subplot(2,3,3); imshow(phase1,[]); title(<span class="string">'Fase'</span>);
+subplot(2,3,4); imshow(input_image2); title(<span class="string">'Imagem Original'</span>);
+subplot(2,3,5); imshow(magnitude2,[]); title(<span class="string">'Espectro'</span>);
+subplot(2,3,6); imshow(phase2,[]); title(<span class="string">'Fase'</span>);
+<span class="comment">%</span>
+combined =  abs(F2) .* exp(J*angle(F1));
+img_combined1 = real(ifft2(double(combined)));
+
+<span class="comment">% figure(5)</span>
+<span class="comment">% imshow(uint8(img_combined1));</span>
+</pre><img vspace="5" hspace="5" src="Lista1_BrunoGuerra_04.png" alt=""> <h2 id="6">Quest&atilde;o 5</h2><pre class="codeinput">input_image = imread(<span class="string">'lena.tif'</span>);
+[M, N] = size(input_image);
+FT_img = fft2(double(input_image));
+
+n = 1;
+D0 = 20;
+
+u = 0:(M-1);
+v = 0:(N-1);
+idx = find(u &gt; M/2);
+u(idx) = u(idx) - M;
+idy = find(v &gt; N/2);
+v(idy) = v(idy) - N;
+
+[V, U] = meshgrid(v, u);
+D = sqrt(U.^2 + V.^2);
+H = 1./(1 + (D./D0).^(2*n));
+G = H.*FT_img;
+
+output_image1 = real(ifft2(double(G)));
+</pre><pre class="codeinput">n = 1;
+D0 = 90;
+
+u = 0:(M-1);
+v = 0:(N-1);
+idx = find(u &gt; M/2);
+u(idx) = u(idx) - M;
+idy = find(v &gt; N/2);
+v(idy) = v(idy) - N;
+
+[V, U] = meshgrid(v, u);
+D = sqrt(U.^2 + V.^2);
+H = 1./(1 + (D./D0).^(2*n));
+G = H.*FT_img;
+
+output_image2 = real(ifft2(double(G)));
+</pre><pre class="codeinput">n = 8;
+D0 = 20;
+
+u = 0:(M-1);
+v = 0:(N-1);
+idx = find(u &gt; M/2);
+u(idx) = u(idx) - M;
+idy = find(v &gt; N/2);
+v(idy) = v(idy) - N;
+
+[V, U] = meshgrid(v, u);
+D = sqrt(U.^2 + V.^2);
+H = 1./(1 + (D./D0).^(2*n));
+G = H.*FT_img;
+
+output_image3 = real(ifft2(double(G)));
+</pre><pre class="codeinput">n = 8;
+D0 = 90;
+
+u = 0:(M-1);
+v = 0:(N-1);
+idx = find(u &gt; M/2);
+u(idx) = u(idx) - M;
+idy = find(v &gt; N/2);
+v(idy) = v(idy) - N;
+
+[V, U] = meshgrid(v, u);
+D = sqrt(U.^2 + V.^2);
+H = 1./(1 + (D./D0).^(2*n));
+
+G = H.*FT_img;
+
+output_image4 = real(ifft2(double(G)));
+
+
+<span class="comment">% Displaying Input Image and Output Image</span>
+figure(6)
+subplot(2,2,1), imshow(output_image1, [ ]); title(<span class="string">'N = 1 e D0 = 20'</span>);
+subplot(2,2,2), imshow(output_image2, [ ]); title(<span class="string">'N = 1 e D0 = 90'</span>);
+subplot(2,2,3), imshow(output_image3, [ ]); title(<span class="string">'N = 8 e D0 = 20'</span>);
+subplot(2,2,4), imshow(output_image4, [ ]); title(<span class="string">'N = 8 e D0 = 90'</span>);
+</pre><img vspace="5" hspace="5" src="Lista1_BrunoGuerra_05.png" alt=""> <h2 id="10">Quest&atilde;o 6</h2><pre class="codeinput">input_image1 = imread(<span class="string">'ruidosa1.tif'</span>);
+input_image2 = imread(<span class="string">'ruidosa2.tif'</span>);
+
+H1 = fspecial(<span class="string">'average'</span>, [3 3]);
+output_image1_mean3x3 = imfilter(input_image1,H1);
+
+H3 = fspecial(<span class="string">'average'</span>, [11 11]);
+output_image1_mean11x11 = imfilter(input_image1,H3);
+
+H1 = fspecial(<span class="string">'average'</span>, [3 3]);
+output_image2_mean3x3 = imfilter(input_image2,H1);
+
+H3 = fspecial(<span class="string">'average'</span>, [11 11]);
+output_image2_mean11x11 = imfilter(input_image2,H3);
+
+figure(7)
+subplot(2,3,1); imshow(input_image1); title(<span class="string">'Ruidosa 1'</span>);
+subplot(2,3,2); imshow(output_image1_mean3x3); title(<span class="string">'Filtro de M&eacute;dia - N = 3'</span>);
+subplot(2,3,3); imshow(output_image1_mean11x11); title(<span class="string">'Filtro de M&eacute;dia - N = 11'</span>);
+subplot(2,3,4); imshow(input_image2); title(<span class="string">'Ruidosa 2'</span>);
+subplot(2,3,5); imshow(output_image2_mean3x3);title(<span class="string">'Filtro de M&eacute;dia - N = 3'</span>);
+subplot(2,3,6); imshow(output_image2_mean11x11); title(<span class="string">'Filtro de M&eacute;dia - N = 11'</span>);
+
+<span class="comment">% [peaksnr, snr] = psnr(input_image2, output_image2_mean11x11);</span>
+<span class="comment">% fprintf('\n The Peak-SNR value is %0.4f', peaksnr);</span>
+<span class="comment">% fprintf('\n The SNR value is %0.4f \n', snr);</span>
+<span class="comment">%</span>
+output_image1_median3x3 = medfilt2(input_image1);
+output_image1_median11x11 = medfilt2(input_image1, [11 11]);
+output_image2_median3x3 = medfilt2(input_image2);
+output_image2_median11x11 = medfilt2(input_image2, [11 11]);
+
+
+
+figure(8)
+subplot(2,3,1); imshow(input_image1); title(<span class="string">'Ruidosa 1'</span>);
+subplot(2,3,2); imshow(output_image1_median3x3); title(<span class="string">'Filtro de Mediana - N = 3'</span>);
+subplot(2,3,3); imshow(output_image1_median11x11); title(<span class="string">'Filtro de Mediana - N = 11'</span>);
+subplot(2,3,4); imshow(input_image2); title(<span class="string">'Ruidosa 2'</span>);
+subplot(2,3,5); imshow(output_image2_median3x3);title(<span class="string">'Filtro de Mediana - N = 3'</span>);
+subplot(2,3,6); imshow(output_image2_median11x11); title(<span class="string">'Filtro de Mediana - N = 11'</span>);
+</pre><img vspace="5" hspace="5" src="Lista1_BrunoGuerra_06.png" alt=""> <img vspace="5" hspace="5" src="Lista1_BrunoGuerra_07.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Processamento Digital de Imagens 2021/1
+% Aluno: Bruno Baptista Guerra
+
+%% Questão 1
+clc; close all; clear all;
+
+img_questao1 = imread('Fig10.15(a).jpg');
+img_size1 = size(img_questao1);
+image = img_questao1(:,:,1);
+A = 110;       
+B = 150;         
+img_size1 = size(img_questao1);
+img_final1 = zeros(img_size1(1),img_size1(2));     
+
+for I = 1:img_size1(1)
+    for J = 1:img_size1(2)
+        if (A < image(I,J)&& image(I,J) < B)  
+            img_final1(I,J) = 0;
+        else
+            img_final1(I,J) = image(I,J);
+        end
+    end
+end
+
+figure(1)
+subplot(1,2,1); imshow(uint8(img_questao1)); title('Imagem Original');
+subplot(1,2,2); imshow(uint8(img_final1)); title('Imagem com o fatiamento de níveis de intensidade')
+
+%% Questão 2
+ 
+input_image = imread('lena.tif');
+[M, N] = size(input_image);
+FT_img = fft2(double(input_image));
+  
+% a) 
+D0 = 30;
+u = 0:(M-1);
+idx = find(u>M/2);
+u(idx) = u(idx)-M;
+v = 0:(N-1);
+idy = find(v>N/2);
+v(idy) = v(idy)-N;  
+[V, U] = meshgrid(v, u);
+D = sqrt(U.^2+V.^2);
+H = double(D <= D0);
+G = H.*FT_img;
+  
+output_image_lowpass = real(ifft2(double(G)));
+
+% b)
+filter_mask = [0 -1 0;-1 4 -1; 0 -1 0];
+%% 
+
+for I = 2:M-1
+    for J = 2:N-1
+        sum = 0;
+        row = 0;
+        col = 1;
+        for k = I-1:I+1
+            row = row + 1;
+            col = 1;
+            for l = J-1:J+1
+                sum = sum + input_image(k,l)*filter_mask(row,col);               
+                col = col + 1;
+            end
+        end
+      output_image_laplacian(I,J) = sum;      
+    end
+end
+
+% c)
+
+resp = imfilter(input_image, filter_mask, 'conv'); 
+
+minR = min(resp(:));
+maxR = max(resp(:));
+resp = (resp - minR) / (maxR - minR);
+sharpened = input_image + resp;
+minA = min(sharpened(:));
+maxA = max(sharpened(:));
+sharpened = (sharpened - minA) / (maxA - minA);
+output_image_sharpened = imadjust(input_image, [0.3 0.7], []);
+
+figure(2)
+subplot(2, 2, 1), imshow(input_image); title('Imagem Original');
+subplot(2, 2, 2), imshow(output_image_lowpass, [ ]); title('Imagem com filtro passa-baixa')
+subplot(2, 2, 3), imshow(output_image_laplacian, [ ]); title('Imagem com filtro laplaciano')
+subplot(2, 2, 4), imshow(output_image_sharpened, [ ]); title('Imagem com máscara de nitidez')
+
+%% Questão 3
+
+input_image = imread('frexp_1.png');
+[M, N] = size(input_image);
+
+output_image_downsample = input_image(1:2:M, 1:2:N);
+
+for I = 1:M
+    for J = 1:N
+        rmin = max(1,I-1);
+        rmax = min(M,I+1);
+        cmin = max(1,J-1);
+        cmax = min(N,J+1);
+        temp = input_image(rmin:rmax, cmin:cmax);
+        output_image_smoothed(I,J) = mean(temp(:));
+    end
+end
+
+
+figure(3)
+subplot(1,3,1); imshow(input_image); title('Imagem Original');
+subplot(1,3,2); imshow(uint8(output_image_downsample)); title('Imagem Reduzida')
+subplot(1,3,3); imshow(uint8(output_image_smoothed)); title('Imagem Suavizada')
+
+%% Questão 4
+
+input_image1 = imread('lena.tif');
+input_image2 = imread('elaine.tif');
+
+
+F1 = fft2(input_image1);
+F1 = log(1 + fftshift(F1));
+magnitude1 = abs(F1);
+phase1 = angle(F1);
+
+F2 = fft2(input_image2);
+F2 = log(1 + fftshift(F2));
+magnitude2 = abs(F2);
+phase2 = angle(F2);
+
+figure(4)
+subplot(2,3,1); imshow(input_image1); title('Imagem Original');
+subplot(2,3,2); imshow(magnitude1,[]); title('Espectro');
+subplot(2,3,3); imshow(phase1,[]); title('Fase');
+subplot(2,3,4); imshow(input_image2); title('Imagem Original');
+subplot(2,3,5); imshow(magnitude2,[]); title('Espectro');
+subplot(2,3,6); imshow(phase2,[]); title('Fase');
+% 
+combined =  abs(F2) .* exp(J*angle(F1));
+img_combined1 = real(ifft2(double(combined)));
+
+% figure(5)
+% imshow(uint8(img_combined1));
+
+%% Questão 5
+
+input_image = imread('lena.tif');
+[M, N] = size(input_image);
+FT_img = fft2(double(input_image));
+  
+n = 1;
+D0 = 20; 
+
+u = 0:(M-1);
+v = 0:(N-1);
+idx = find(u > M/2);
+u(idx) = u(idx) - M;
+idy = find(v > N/2);
+v(idy) = v(idy) - N;
+  
+[V, U] = meshgrid(v, u);
+D = sqrt(U.^2 + V.^2); 
+H = 1./(1 + (D./D0).^(2*n));
+G = H.*FT_img;
+
+output_image1 = real(ifft2(double(G)));
+
+%%
+n = 1; 
+D0 = 90; 
+
+u = 0:(M-1);
+v = 0:(N-1);
+idx = find(u > M/2);
+u(idx) = u(idx) - M;
+idy = find(v > N/2);
+v(idy) = v(idy) - N;
+  
+[V, U] = meshgrid(v, u);
+D = sqrt(U.^2 + V.^2);  
+H = 1./(1 + (D./D0).^(2*n));
+G = H.*FT_img;
+
+output_image2 = real(ifft2(double(G)));
+
+%%
+n = 8;  
+D0 = 20; 
+
+u = 0:(M-1);
+v = 0:(N-1);
+idx = find(u > M/2);
+u(idx) = u(idx) - M;
+idy = find(v > N/2);
+v(idy) = v(idy) - N;
+  
+[V, U] = meshgrid(v, u); 
+D = sqrt(U.^2 + V.^2);
+H = 1./(1 + (D./D0).^(2*n));
+G = H.*FT_img;
+
+output_image3 = real(ifft2(double(G)));
+
+%%
+n = 8;  
+D0 = 90; 
+
+u = 0:(M-1);
+v = 0:(N-1);
+idx = find(u > M/2);
+u(idx) = u(idx) - M;
+idy = find(v > N/2);
+v(idy) = v(idy) - N;
+  
+[V, U] = meshgrid(v, u);
+D = sqrt(U.^2 + V.^2); 
+H = 1./(1 + (D./D0).^(2*n));
+  
+G = H.*FT_img;
+
+output_image4 = real(ifft2(double(G)));
+
+    
+% Displaying Input Image and Output Image
+figure(6)
+subplot(2,2,1), imshow(output_image1, [ ]); title('N = 1 e D0 = 20');
+subplot(2,2,2), imshow(output_image2, [ ]); title('N = 1 e D0 = 90');
+subplot(2,2,3), imshow(output_image3, [ ]); title('N = 8 e D0 = 20');
+subplot(2,2,4), imshow(output_image4, [ ]); title('N = 8 e D0 = 90');
+
+%% Questão 6
+
+input_image1 = imread('ruidosa1.tif');
+input_image2 = imread('ruidosa2.tif');
+
+H1 = fspecial('average', [3 3]); 
+output_image1_mean3x3 = imfilter(input_image1,H1); 
+
+H3 = fspecial('average', [11 11]); 
+output_image1_mean11x11 = imfilter(input_image1,H3); 
+
+H1 = fspecial('average', [3 3]); 
+output_image2_mean3x3 = imfilter(input_image2,H1); 
+
+H3 = fspecial('average', [11 11]); 
+output_image2_mean11x11 = imfilter(input_image2,H3); 
+
+figure(7)
+subplot(2,3,1); imshow(input_image1); title('Ruidosa 1');
+subplot(2,3,2); imshow(output_image1_mean3x3); title('Filtro de Média - N = 3');
+subplot(2,3,3); imshow(output_image1_mean11x11); title('Filtro de Média - N = 11');
+subplot(2,3,4); imshow(input_image2); title('Ruidosa 2');
+subplot(2,3,5); imshow(output_image2_mean3x3);title('Filtro de Média - N = 3');
+subplot(2,3,6); imshow(output_image2_mean11x11); title('Filtro de Média - N = 11');
+
+% [peaksnr, snr] = psnr(input_image2, output_image2_mean11x11);
+% fprintf('\n The Peak-SNR value is %0.4f', peaksnr);
+% fprintf('\n The SNR value is %0.4f \n', snr);
+% 
+output_image1_median3x3 = medfilt2(input_image1);
+output_image1_median11x11 = medfilt2(input_image1, [11 11]);
+output_image2_median3x3 = medfilt2(input_image2);
+output_image2_median11x11 = medfilt2(input_image2, [11 11]);
+
+
+
+figure(8)
+subplot(2,3,1); imshow(input_image1); title('Ruidosa 1');
+subplot(2,3,2); imshow(output_image1_median3x3); title('Filtro de Mediana - N = 3');
+subplot(2,3,3); imshow(output_image1_median11x11); title('Filtro de Mediana - N = 11');
+subplot(2,3,4); imshow(input_image2); title('Ruidosa 2');
+subplot(2,3,5); imshow(output_image2_median3x3);title('Filtro de Mediana - N = 3');
+subplot(2,3,6); imshow(output_image2_median11x11); title('Filtro de Mediana - N = 11');
+
+
+##### SOURCE END #####
+--></body></html>
